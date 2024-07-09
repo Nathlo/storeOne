@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 /* Display all products  */
 Route::get('/', [ProductController::class, 'index'])->name('product');
 /* Give detail information for a specified product  */
-Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.detail');
+Route::get('/product/{product}', [ProductController::class, 'show'])->name('product.detail');
 /* List all products from a specified category  */
 Route::get('/product/category/{id}', [ProductController::class, 'productByCategory'])->name('product.category');
 

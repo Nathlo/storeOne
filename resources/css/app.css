@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.container {
+    display: flex;
+    /* flex-direction: column; */
+    flex: 1;
+    height: 70vh;
+    background-color: aquamarine;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.box {
+    display: flex;
+    width: 100px;
+    height: 100px;
+    background-color: blanchedalmond;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media only screen and (min-width:800px) {
+    .container {
+        flex-direction: column;
+    }
+}
