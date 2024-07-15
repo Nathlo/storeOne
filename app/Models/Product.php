@@ -18,6 +18,11 @@ class Product extends Model
         'images'
     ];
 
+    protected $casts = [
+        'attachments' => 'array',
+        ];
+
+
     /**
      * Get the category that owns the Product
      *

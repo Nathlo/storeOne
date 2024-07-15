@@ -4,6 +4,11 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
 /* Display all products  */
 Route::get('/', [ProductController::class, 'index'])->name('product');
 /* Give detail information for a specified product  */

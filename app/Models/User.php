@@ -3,14 +3,30 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Panel;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Filament\Models\Contracts\FilamentUser;
 
+// authorisation filaments users
+// class User extends Authenticatable implements FilamentUser
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    // public function canAccessFilament(Panel $panel): bool
+    // {
+    //     if($this->role=='admin') {
+    //         return true ;
+    //            } else  {
+    //                 return false;
+    //             }
+
+    // }
+
+
 
     /**
      * The attributes that are mass assignable.
