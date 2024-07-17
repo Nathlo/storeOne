@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 
 
 Route::get('/welcome', function () {
@@ -28,4 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+/*  Basket management */
+Route::middleware('auth')->group(function () {
+    Route::get('/panier', [PanierController::class, 'index'])->name('panier.lister');
+    Route::get('/panier/add/{product}', [PanierController::class, 'ajouter'])->name('panier.ajouter');
+    Route::get('/panier/remove/{panier}', [PanierController::class, 'removeOne'])->name('panier.enleverUn');
+    Route::get('/panier/delete/{panier}', [PanierController::class, 'removeAll'])->name('panier.enleverTout');
+    Route::get('/panier/empty', [PanierController::class, 'emptyBasket'])->name('panier.vider');
+});
 require __DIR__.'/auth.php';

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Panier;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,6 +34,18 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    /**
+     * Get the paniers that owns the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function paniers(): BelongsTo
+    {
+        return $this->belongsTo(Panier::class);
+    }
+
+
 
 
 }

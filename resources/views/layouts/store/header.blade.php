@@ -7,7 +7,7 @@
         <li class="px-10">
             <a href="{{ route('dashboard') }}">Mon Compte</a>
         </li>
-        <li class="px-10">Panier</li>
+        <li class="px-10">
+            <a href="{{ route('panier.lister') }}">Panier</a>
+        </li>
     </ul>
-
-</header>
