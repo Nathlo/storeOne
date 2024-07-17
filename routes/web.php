@@ -28,5 +28,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/panier', [PanierController::class, 'index'])->name('panier.lister');
     Route::get('/panier/add/{product}', [PanierController::class, 'ajouter'])->name('panier.ajouter');
+    Route::get('/panier/remove/{panier}', [PanierController::class, 'removeOne'])->name('panier.enleverUn');
+    Route::get('/panier/delete/{panier}', [PanierController::class, 'removeAll'])->name('panier.enleverTout');
+    Route::get('/panier/empty', [PanierController::class, 'emptyBasket'])->name('panier.vider');
 });
 require __DIR__.'/auth.php';
