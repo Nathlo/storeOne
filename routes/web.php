@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PanierController;
+use App\Http\Controllers\FavorisController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
@@ -37,4 +38,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/panier/delete/{panier}', [PanierController::class, 'removeAll'])->name('panier.enleverTout');
     Route::get('/panier/empty', [PanierController::class, 'emptyBasket'])->name('panier.vider');
 });
+
+/*  Favorite management */
+Route::middleware('auth')->group(function () {
+    Route::get('/favoris', [FavorisController::class, 'index'])->name('favoris.lister');
+    Route::get('/favoris/edit/{product}', [FavorisController::class, 'edit'])->name('favoris.edit');
+    
+});
+
 require __DIR__.'/auth.php';

@@ -3,13 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Commande;
 use Filament\Panel;
+use App\Models\Commande;
+use App\Models\Favorite;
 use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Filament\Models\Contracts\FilamentUser;
 
 // authorisation filaments users
 // class User extends Authenticatable implements FilamentUser
@@ -72,6 +73,16 @@ class User extends Authenticatable
     public function commande(): HasMany
     {
         return $this->hasMany(Commande::class);
+    }
+
+     /**
+     * Get all of the favorite for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function favorites(): HasMany
+    {
+        return $this->hasMany(Favorite::class);
     }
 
 
