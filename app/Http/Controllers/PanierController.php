@@ -14,8 +14,14 @@ class PanierController extends Controller
     // list all products in the basket
         $paniers = Panier::where('user_id', auth()->user()->id)
                             ->get();
+    // calculate total price of all products
+        $totalPrice = 0;
+
+            foreach ($paniers as $panier) {
+                $totalPrice += $panier->quantite * $panier->product->price;
+            }
     
-        return view('panier.lister', compact('paniers'));
+        return view('panier.lister', compact('paniers', 'totalPrice'));
     }
 
     public function ajouter(Product $product) {
@@ -46,41 +52,48 @@ class PanierController extends Controller
         }
         
     // remove one product from quantity in the cart
-        public function removeOne(Panier $panier)
-        {
+    public function removeOne(Panier $panier)
+    {
 
-            if ($panier->quantite == 1) {
-                $panier->delete();
-            } else {
-                $panier->quantite -= 1;
-                $panier->save();
-            }
-            return back();
+        if ($panier->quantite == 1) {
+            $panier->delete();
+        } else {
+            $panier->quantite -= 1;
+            $panier->save();
         }
+        return back();
+    }
 
     // delete a specified product from cart clicking on an icon
-        public function removeAll(Panier $panier)
-        {
-            $panier->delete();
-            return back();
-        }
+    public function removeAll(Panier $panier)
+    {
+        $panier->delete();
+        return back();
+    }
 
     // empty all products from basket
-        public function emptyBasket()
-        {
-            $paniers = Panier::where('user_id', '=', auth()->user()->id)
-                                ->get();
+    public function emptyBasket()
+    {
+        $paniers = Panier::where('user_id', '=', auth()->user()->id)
+                            ->get();
 
-            foreach ($paniers as $panier) {
-                $panier->delete();
-            }
-
-            return back();
+        foreach ($paniers as $panier) {
+            $panier->delete();
         }
+
+        return back();
+    }
         
             
-        // public function commander() 
-        // {
-        //     return "commander" ;
-        // }
+public function commander() 
+{
+    $paniers = Panier::where('user_id', auth()->user()->id)
+                        ->get();
+
+    
+
+    return "commander";
+}
+
+
 }

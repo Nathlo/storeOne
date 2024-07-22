@@ -47,7 +47,20 @@ class ProductController extends Controller
     }
 
 
+    /* Display a message with the newest product if result is null when requesting same category product */
+    public function showOne(Product $product) {
 
+        $product = Product::where('category_id', $product->category_id)->first();
+        
+        $message = "";
+
+        if( !isset($product) ) {
+            $message = "This product does not exist. Here is a new product.";
+            $product = Product::orderBy('id', 'desc')->first();
+        }
+
+        return view('product.viewcaca', compact('product', 'message'));
+    }
 
 
 

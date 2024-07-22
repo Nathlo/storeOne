@@ -77,13 +77,12 @@
             <p class="text-blue-900 text-xl font-extrabold">Resumé de la commande</p>
             <div class="flex flex-col p-4 gap-4 text-lg font-semibold shadow-md border rounded-sm">
                 <div class="flex flex-row justify-between">
-                    <p class="text-gray-600">Prix total ({{$nbrArticle}} produit)</p>
-                    <p class="text-end font-bold"> Here is the</p>
+                    <p class="text-gray-600">Quantité : {{$nbrArticle}} produits</p>
+                    <p class="text-end font-bold"> Prix total : {{ $totalPrice }} €</p>
                 </div>
-                <div class="flex gap-2">
-                    <button class="transition-colors text-sm bg-blue-600 hover:bg-blue-700 p-2 rounded-sm w-full text-white text-hover shadow-md">
-                            Commander  
-                    </button>
+                <div class="flex flex-col gap-2">
+                    <a href="" class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Commander</a>
+
                     <a href="{{route('product')}}" class="transition-colors text-sm bg-white border border-gray-600 p-2 rounded-sm w-full text-gray-700 text-hover shadow-md text-center">
                             Ajouter des produits
                     </a>
