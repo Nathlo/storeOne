@@ -39,4 +39,14 @@ class Commande extends Model
     }
 
 
+    /**
+     * Get all of the comments for the Commande
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function commandeItem(): HasMany
+    {
+        return $this->hasMany(CommandeItem::class);
+    }
+
 }
