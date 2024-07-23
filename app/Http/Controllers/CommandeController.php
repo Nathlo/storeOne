@@ -6,6 +6,7 @@ use App\Models\Panier;
 use App\Models\Commande;
 use App\Models\CommandeItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class CommandeController extends Controller
 {
@@ -67,11 +68,40 @@ class CommandeController extends Controller
         // empty basket
         Panier::where('user_id', auth()->user()->id)->delete();
 
-
-        return 'commander';
+        return redirect ($this->stripeCheckout($total, $commande->id));
 
     }
 
+    public function stripeCheckout($total, $numero)
+    {
+        // API setting up
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+        // url payment confirmation
+        $redirectUrl = route('commande.lister') . '?session_id={CHECKOUT_SESSION_ID}';
+        
+        // payment session creationxs
+        $response =  $stripe->checkout->sessions->create([
+            'success_url' => $redirectUrl,
+            'payment_method_types' => ['link', 'card'],
+            'line_items' => [
+                [
+                    'price_data'  => [
+                        'product_data' => [
+                            'name' => $numero,
+                        ],
+                        'unit_amount'  => 100 * $total,
+                        'currency'     => 'EUR',
+                    ],
+                    'quantity'    => 1
+                ],
+            ],
+            'mode' => 'payment',
+            'allow_promotion_codes' => false
+        ]);
+
+        // generate payment url
+        return $response['url'];
+    }
 
 
 }
