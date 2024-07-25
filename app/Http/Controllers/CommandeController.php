@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Config;
 class CommandeController extends Controller
 {
 
-    // display list of orders
+// display list of orders
     public function index() {
 
         $commandes = Commande::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
@@ -20,7 +20,7 @@ class CommandeController extends Controller
     }
 
 
-    // create an order and add products from cart
+// create an order and add products from cart
     public function create() {
 
         // read products in cart
@@ -28,7 +28,7 @@ class CommandeController extends Controller
         // dd($paniers);
         // dd($commande->id);
 
-        if(count($paniers) == 0) { return 'vide' ;}
+        if(count($paniers) == 0) { return 'vide' ;} // if cart empty then notify user
 
         $commande = Commande::create([
             'user_id'=> auth()->user()->id,
@@ -45,9 +45,6 @@ class CommandeController extends Controller
             $quantite = $panier->quantite;     // product quantity
             $price = $panier->product->price;   // product price
             $total += $price * $quantite; 
-
-
-            
 
             // insert in CommandeItem Tab
             CommandeItem::create([
@@ -68,26 +65,31 @@ class CommandeController extends Controller
         // empty basket
         Panier::where('user_id', auth()->user()->id)->delete();
 
-        return redirect ($this->stripeCheckout($total, $commande->id));
+        $urlPaiement = $this->stripeCheckout($total, $commande->id);
+
+        return redirect ($urlPaiement);
 
     }
 
-    public function stripeCheckout($total, $numero)
+// create payment session response
+    public function stripeCheckout($total, $commandeId)
     {
         // API setting up
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
         // url payment confirmation
-        $redirectUrl = route('commande.lister') . '?session_id={CHECKOUT_SESSION_ID}';
+        $redirectUrl = route('commande.success') . '?session_id={CHECKOUT_SESSION_ID}';
         
-        // payment session creationxs
+        // payment session creations
         $response =  $stripe->checkout->sessions->create([
             'success_url' => $redirectUrl,
             'payment_method_types' => ['link', 'card'],
+            'customer_email' => auth()->user()->email,
+            'client_reference_id' => $commandeId,
             'line_items' => [
                 [
                     'price_data'  => [
                         'product_data' => [
-                            'name' => $numero,
+                            'name' => $commandeId,
                         ],
                         'unit_amount'  => 100 * $total,
                         'currency'     => 'EUR',
@@ -103,5 +105,36 @@ class CommandeController extends Controller
         return $response['url'];
     }
 
+
+// check and confirm payment is successfull
+    public function success(Request $request) {
+
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+
+        $session = $stripe->checkout->sessions->retrieve($request->session_id);
+        // dd(info($session));
+        // dd($session);
+
+        // info ($session->payment_intent);
+        if($request->objet == 'checkout.session' &&
+                $request->payment_status === 'paid' &&
+                $request->status === 'complete') {
+
+            $commande =Commande::find($request->client_reference_id);
+
+            $commande->update(['numero' => $request->payment_intent]);
+            $commande->save();
+        }
+
+        // return 'success';
+        return redirect(route('commande.lister'));
+    }
+
+// webhook to get Stripe notifications
+    public function webhook(Request $request) {
+
+        // dd($request);
+        return 'ok';
+    }
 
 }
