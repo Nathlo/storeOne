@@ -1,195 +1,236 @@
-@extends('layouts.store')
+@extends('layouts.shop')
+
+@section('title')
+    Cartzio | Product Détail
+@endsection
+
 
 @section('content')
     
-{{ $product->isFavorite->where('user_id', auth()->user()->id) }}
+    <!-- Start -->
+    <section class="relative md:py-24 py-16 ">
+        <div class="container relative">
+            <div class="grid md:grid-cols-2 grid-cols-1 gap-6 items-center">
+                <div class="">
+                    <ul class="product-imgs flex list-none items-center">
+                        <li>
+                            <ul class="img-select list-none">
+                                <li class="p-px">
+                                    <a href="#" data-id="1">
+                                        <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/mens-jecket.jpg" class="shadow dark:shadow-gray-800" alt="">
+                                    </a>
+                                </li>
+                                <li class="p-px">
+                                    <a href="#" data-id="2">
+                                        <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/mens-jecket-3.jpg" class="shadow dark:shadow-gray-800" alt="">
+                                    </a>
+                                </li>
+                                <li class="p-px">
+                                    <a href="#" data-id="3">
+                                        <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/mens-jecket-left.jpg" class="shadow dark:shadow-gray-800" alt="">
+                                    </a>
+                                </li>
+                                <li class="p-px">
+                                    <a href="#" data-id="4">
+                                        <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/mens-jecket-back.jpg" class="shadow dark:shadow-gray-800" alt="">
+                                    </a>
+                                </li>
+                                <li class="p-px">
+                                    <a href="#" data-id="5">
+                                        <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/mens-jecket-4.jpg" class="shadow dark:shadow-gray-800" alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
-<div class="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
-    <div class="relative flex w-full items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-      
+                        <li class="img-display shadow dark:shadow-gray-800 m-px">
+                            <div class="img-showcase flex w-full duration-500">
+                                <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/mens-jecket.jpg" class="min-w-full" alt="shoe image">
+                                <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/mens-jecket-3.jpg" class="min-w-full" alt="shoe image">
+                                <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/mens-jecket-left.jpg" class="min-w-full" alt="shoe image">
+                                <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/mens-jecket-back.jpg" class="min-w-full" alt="shoe image">
+                                <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/mens-jecket-4.jpg" class="min-w-full" alt="shoe image">
+                            </div>
+                        </li>
+                    </ul>
+                </div><!--end content-->
 
-      <div class="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
-        <div class="aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-          <img src="https://tailwindui.com/img/ecommerce-images/product-quick-preview-02-detail.jpg" alt="Two each of gray, white, and black shirts arranged on table." class="object-cover object-center">
-        </div>
-        <div class="sm:col-span-8 lg:col-span-7">
-          <h2 class="text-2xl font-bold text-gray-900 sm:pr-12">{{ $product->name }}</h2>
+                <div class="">
+                    <h5 class="text-2xl font-semibold">{{$product->name}}</h5>
+                    <div class="mt-2">
+                        <span class="text-slate-400 font-semibold me-1">{{$product->price}}€</span>
 
-          <section aria-labelledby="information-heading" class="mt-2">
-            <h3 id="information-heading" class="sr-only">Product information</h3>
+                        <ul class="list-none inline-block text-orange-400">
+                            <li class="inline"><i class="mdi mdi-star text-lg"></i></li>
+                            <li class="inline"><i class="mdi mdi-star text-lg"></i></li>
+                            <li class="inline"><i class="mdi mdi-star text-lg"></i></li>
+                            <li class="inline"><i class="mdi mdi-star text-lg"></i></li>
+                            <li class="inline"><i class="mdi mdi-star text-lg"></i></li>
+                            <li class="inline text-slate-400 font-semibold">4.8 (45)</li>
+                        </ul>
+                    </div>
 
-            <p class="text-2xl text-gray-900">{{ $product->price }}</p>
+                    <div class="mt-4">
+                        <h5 class="text-lg font-semibold">Description :</h5>
+                        <p class="text-slate-400 mt-2">{{$product->description}}</p>
+                    
+                        
+                    </div>
 
-            <!-- Reviews -->
-            <div class="mt-6">
-              <h4 class="sr-only">Reviews</h4>
-              <div class="flex items-center">
-                <div class="flex items-center">
-                  <!-- Active: "text-gray-900", Default: "text-gray-200" -->
-                  <svg class="h-5 w-5 flex-shrink-0 text-gray-900" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                  </svg>
-                  <svg class="h-5 w-5 flex-shrink-0 text-gray-900" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                  </svg>
-                  <svg class="h-5 w-5 flex-shrink-0 text-gray-900" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                  </svg>
-                  <svg class="h-5 w-5 flex-shrink-0 text-gray-900" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                  </svg>
-                  <svg class="h-5 w-5 flex-shrink-0 text-gray-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clip-rule="evenodd" />
-                  </svg>
-                </div>
-                <p class="sr-only">3.9 out of 5 stars</p>
-                <a href="#" class="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">117 reviews</a>
-              </div>
+                    <div class="grid lg:grid-cols-2 grid-cols-1 gap-6 mt-4">
+                        
+
+                        <div class="flex items-center">
+                            <h5 class="text-lg font-semibold me-2">Quantity:</h5>
+                            <div class="qty-icons ms-3 space-x-0.5">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="size-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white minus">-</button>
+                                <input min="0" name="quantity" value="0" type="number" class="h-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white pointer-events-none w-16 ps-4 quantity">
+                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="size-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white plus">+</button>
+                            </div>
+                        </div><!--end content-->
+
+                       
+                    </div><!--end grid-->
+
+                    <div class="mt-4 space-x-1">
+                        <a href="{{ route('panier.ajouter', $product) }}" class="py-2 px-5 inline-block font-semibold tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white mt-2">Ajoutez au panier</a>
+                    </div>
+                </div><!--end content-->
+            </div><!--end grid-->
+            
+    
+        </div><!--end container-->
+
+        <div class="container lg:mt-24 mt-16">
+            <div class="grid grid-cols-1 mb-6 text-center">
+                <h3 class="font-semibold text-3xl leading-normal">Produits similaires</h3>
+            </div><!--end grid-->
+
+            <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6 pt-6">
+                <div class="group">
+                    <div class="relative overflow-hidden shadow dark:shadow-gray-800 group-hover:shadow-lg group-hover:dark:shadow-gray-800 rounded-md duration-500">
+                        <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/sweater-t-shirt.jpg" class="group-hover:scale-110 duration-500" alt="">
+
+                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
+                            <a href="shop-cart.html" class="py-2 px-5 inline-block font-semibold tracking-wide align-middle duration-500 text-base text-center bg-slate-900 text-white w-full rounded-md">Add to Cart</a>
+                        </div>
+
+                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500 space-y-1">
+                            <li><a href="javascript:void(0)" class="size-10 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-center rounded-full bg-white text-slate-900 hover:bg-slate-900 hover:text-white shadow"><i data-feather="heart" class="size-4"></i></a></li>
+                            <li class="mt-1"><a href="shop-item-detail.html" class="size-10 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-center rounded-full bg-white text-slate-900 hover:bg-slate-900 hover:text-white shadow"><i data-feather="eye" class="size-4"></i></a></li>
+                            <li class="mt-1"><a href="javascript:void(0)" class="size-10 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-center rounded-full bg-white text-slate-900 hover:bg-slate-900 hover:text-white shadow"><i data-feather="bookmark" class="size-4"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="product-detail-one.html" class="hover:text-orange-500 text-lg font-medium">Sweater T-Shirt</a>
+                        <div class="flex justify-between items-center mt-1">
+                            <p>$16.00 <del class="text-slate-400">$21.00</del></p>
+                            <ul class="font-medium text-amber-400 list-none">
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!--end content-->
+
+                <div class="group">
+                    <div class="relative overflow-hidden shadow dark:shadow-gray-800 group-hover:shadow-lg group-hover:dark:shadow-gray-800 rounded-md duration-500">
+                        <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/trendy-t-shirt2.jpg" class="group-hover:scale-110 duration-500" alt="">
+
+                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
+                            <a href="shop-cart.html" class="py-2 px-5 inline-block font-semibold tracking-wide align-middle duration-500 text-base text-center bg-slate-900 text-white w-full rounded-md">Add to Cart</a>
+                        </div>
+
+                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500 space-y-1">
+                            <li><a href="javascript:void(0)" class="size-10 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-center rounded-full bg-white text-slate-900 hover:bg-slate-900 hover:text-white shadow"><i data-feather="heart" class="size-4"></i></a></li>
+                            <li class="mt-1"><a href="shop-item-detail.html" class="size-10 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-center rounded-full bg-white text-slate-900 hover:bg-slate-900 hover:text-white shadow"><i data-feather="eye" class="size-4"></i></a></li>
+                            <li class="mt-1"><a href="javascript:void(0)" class="size-10 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-center rounded-full bg-white text-slate-900 hover:bg-slate-900 hover:text-white shadow"><i data-feather="bookmark" class="size-4"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="product-detail-one.html" class="hover:text-orange-500 text-lg font-medium">Trendy T-shirt</a>
+                        <div class="flex justify-between items-center mt-1">
+                            <p>$16.00 <del class="text-slate-400">$21.00</del></p>
+                            <ul class="font-medium text-amber-400 list-none">
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!--end content-->
+
+                <div class="group">
+                    <div class="relative overflow-hidden shadow dark:shadow-gray-800 group-hover:shadow-lg group-hover:dark:shadow-gray-800 rounded-md duration-500">
+                        <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/men-white-espadrilles-slip-shoes.jpg" class="group-hover:scale-110 duration-500" alt="">
+
+                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
+                            <a href="shop-cart.html" class="py-2 px-5 inline-block font-semibold tracking-wide align-middle duration-500 text-base text-center bg-slate-900 text-white w-full rounded-md">Add to Cart</a>
+                        </div>
+
+                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500 space-y-1">
+                            <li><a href="javascript:void(0)" class="size-10 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-center rounded-full bg-white text-slate-900 hover:bg-slate-900 hover:text-white shadow"><i data-feather="heart" class="size-4"></i></a></li>
+                            <li class="mt-1"><a href="shop-item-detail.html" class="size-10 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-center rounded-full bg-white text-slate-900 hover:bg-slate-900 hover:text-white shadow"><i data-feather="eye" class="size-4"></i></a></li>
+                            <li class="mt-1"><a href="javascript:void(0)" class="size-10 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-center rounded-full bg-white text-slate-900 hover:bg-slate-900 hover:text-white shadow"><i data-feather="bookmark" class="size-4"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="product-detail-one.html" class="hover:text-orange-500 text-lg font-medium">Mens White Slip Shoes</a>
+                        <div class="flex justify-between items-center mt-1">
+                            <p>$16.00 <del class="text-slate-400">$21.00</del></p>
+                            <ul class="font-medium text-amber-400 list-none">
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!--end content-->
+
+                <div class="group">
+                    <div class="relative overflow-hidden shadow dark:shadow-gray-800 group-hover:shadow-lg group-hover:dark:shadow-gray-800 rounded-md duration-500">
+                        <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/luxurious-bag.jpg" class="group-hover:scale-110 duration-500" alt="">
+
+                        <div class="absolute -bottom-20 group-hover:bottom-3 start-3 end-3 duration-500">
+                            <a href="shop-cart.html" class="py-2 px-5 inline-block font-semibold tracking-wide align-middle duration-500 text-base text-center bg-slate-900 text-white w-full rounded-md">Add to Cart</a>
+                        </div>
+
+                        <ul class="list-none absolute top-[10px] end-4 opacity-0 group-hover:opacity-100 duration-500 space-y-1">
+                            <li><a href="javascript:void(0)" class="size-10 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-center rounded-full bg-white text-slate-900 hover:bg-slate-900 hover:text-white shadow"><i data-feather="heart" class="size-4"></i></a></li>
+                            <li class="mt-1"><a href="shop-item-detail.html" class="size-10 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-center rounded-full bg-white text-slate-900 hover:bg-slate-900 hover:text-white shadow"><i data-feather="eye" class="size-4"></i></a></li>
+                            <li class="mt-1"><a href="javascript:void(0)" class="size-10 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-center rounded-full bg-white text-slate-900 hover:bg-slate-900 hover:text-white shadow"><i data-feather="bookmark" class="size-4"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-4">
+                        <a href="product-detail-one.html" class="hover:text-orange-500 text-lg font-medium">Ladies Luxurious Bag</a>
+                        <div class="flex justify-between items-center mt-1">
+                            <p>$16.00 <del class="text-slate-400">$21.00</del></p>
+                            <ul class="font-medium text-amber-400 list-none">
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                                <li class="inline"><i class="mdi mdi-star"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div><!--end content-->
             </div>
-          </section>
-
-          <section aria-labelledby="options-heading" class="mt-10">
-            <h3 id="options-heading" class="sr-only">Product options</h3>
-
-            <form>
-              <!-- Colors -->
-              {{-- <fieldset aria-label="Choose a color"> --}}
-                <h2 class="text-sm font-medium text-gray-900">Description</h2>
-
-                <div class="mt-4 flex items-center space-x-3">
-                  <!-- Active and Checked: "ring ring-offset-1" -->
-                  {{ $product->description}}
-                  {{-- <label aria-label="White" class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 ring-gray-400 focus:outline-none">
-                    <input type="radio" name="color-choice" value="White" class="sr-only">
-                    <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10 bg-white"></span>
-                  </label>
-                  <!-- Active and Checked: "ring ring-offset-1" -->
-                  <label aria-label="Gray" class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 ring-gray-400 focus:outline-none">
-                    <input type="radio" name="color-choice" value="Gray" class="sr-only">
-                    <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10 bg-gray-200"></span>
-                  </label>
-                  <!-- Active and Checked: "ring ring-offset-1" -->
-                  <label aria-label="Black" class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 ring-gray-900 focus:outline-none">
-                    <input type="radio" name="color-choice" value="Black" class="sr-only">
-                    <span aria-hidden="true" class="h-8 w-8 rounded-full border border-black border-opacity-10 bg-gray-900"></span>
-                  </label> --}}
-                </div>
-              {{-- </fieldset> --}}
-
-              <!-- Sizes -->
-              <fieldset class="mt-10" aria-label="Choose a size">
-                <div class="flex items-center justify-between">
-                  <div class="text-sm font-medium text-gray-900">Size</div>
-                  <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Size guide</a>
-                </div>
-
-                <div class="mt-4 grid grid-cols-4 gap-4">
-                  <!-- Active: "ring-2 ring-indigo-500" -->
-                  <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
-                    <input type="radio" name="size-choice" value="XXS" class="sr-only">
-                    <span>XXS</span>
-                    <!--
-                      Active: "border", Not Active: "border-2"
-                      Checked: "border-indigo-500", Not Checked: "border-transparent"
-                    -->
-                    <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
-                  </label>
-                  <!-- Active: "ring-2 ring-indigo-500" -->
-                  <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
-                    <input type="radio" name="size-choice" value="XS" class="sr-only">
-                    <span>XS</span>
-                    <!--
-                      Active: "border", Not Active: "border-2"
-                      Checked: "border-indigo-500", Not Checked: "border-transparent"
-                    -->
-                    <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
-                  </label>
-                  <!-- Active: "ring-2 ring-indigo-500" -->
-                  <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
-                    <input type="radio" name="size-choice" value="S" class="sr-only">
-                    <span>S</span>
-                    <!--
-                      Active: "border", Not Active: "border-2"
-                      Checked: "border-indigo-500", Not Checked: "border-transparent"
-                    -->
-                    <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
-                  </label>
-                  <!-- Active: "ring-2 ring-indigo-500" -->
-                  <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
-                    <input type="radio" name="size-choice" value="M" class="sr-only">
-                    <span>M</span>
-                    <!--
-                      Active: "border", Not Active: "border-2"
-                      Checked: "border-indigo-500", Not Checked: "border-transparent"
-                    -->
-                    <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
-                  </label>
-                  <!-- Active: "ring-2 ring-indigo-500" -->
-                  <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
-                    <input type="radio" name="size-choice" value="L" class="sr-only">
-                    <span>L</span>
-                    <!--
-                      Active: "border", Not Active: "border-2"
-                      Checked: "border-indigo-500", Not Checked: "border-transparent"
-                    -->
-                    <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
-                  </label>
-                  <!-- Active: "ring-2 ring-indigo-500" -->
-                  <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
-                    <input type="radio" name="size-choice" value="XL" class="sr-only">
-                    <span>XL</span>
-                    <!--
-                      Active: "border", Not Active: "border-2"
-                      Checked: "border-indigo-500", Not Checked: "border-transparent"
-                    -->
-                    <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
-                  </label>
-                  <!-- Active: "ring-2 ring-indigo-500" -->
-                  <label class="group relative flex cursor-pointer items-center justify-center rounded-md border bg-white px-4 py-3 text-sm font-medium uppercase text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none sm:flex-1">
-                    <input type="radio" name="size-choice" value="XXL" class="sr-only">
-                    <span>XXL</span>
-                    <!--
-                      Active: "border", Not Active: "border-2"
-                      Checked: "border-indigo-500", Not Checked: "border-transparent"
-                    -->
-                    <span class="pointer-events-none absolute -inset-px rounded-md" aria-hidden="true"></span>
-                  </label>
-                  <!-- Active: "ring-2 ring-indigo-500" -->
-                  <label class="group relative flex cursor-not-allowed items-center justify-center rounded-md border bg-gray-50 px-4 py-3 text-sm font-medium uppercase text-gray-200 hover:bg-gray-50 focus:outline-none sm:flex-1">
-                    <input type="radio" name="size-choice" value="XXXL" disabled class="sr-only">
-                    <span>XXXL</span>
-                    <span aria-hidden="true" class="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200">
-                      <svg class="absolute inset-0 h-full w-full stroke-2 text-gray-200" viewBox="0 0 100 100" preserveAspectRatio="none" stroke="currentColor">
-                        <line x1="0" y1="100" x2="100" y2="0" vector-effect="non-scaling-stroke" />
-                      </svg>
-                    </span>
-                  </label>
-                </div>
-              </fieldset>
-
-              <a href="{{ route('panier.ajouter', $product)  }}" class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add to bag</a>
-              
-              @auth
-
-                @if (count($product->isFavorite->where('user_id', auth()->user()->id)) > 0)
-                <a href="{{ route('favoris.edit', $product)  }}" class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Retirer des Favoris</a>
-                  
-                @else
-                
-                <a href="{{ route('favoris.edit', $product)  }}" class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-orange-600 px-8 py-3 text-base font-medium text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Ajouter aux Favoris</a>
-                
-                @endif
-              
-              @endauth
-              
-            </form>
-          </section>
         </div>
-      </div>
-    </div>
-  </div>
+    </section><!--end section-->
+    <!-- End -->
 
-  <x-product-card :products="$products"/>
+
 
 @endsection
-

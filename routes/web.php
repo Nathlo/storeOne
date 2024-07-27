@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\CommandeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PanierController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FavorisController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CommandeController;
 
 
 Route::get('/welcome', function () {
@@ -19,10 +20,15 @@ Route::get('/product/{product}', [ProductController::class, 'show'])->name('prod
 /* List all products from a specified category  */
 Route::get('/product/category/{id}', [ProductController::class, 'productByCategory'])->name('product.category');
 
+
+Route::get('/contact', [ContactController::class, 'edit'])->name('contact.edit');
+
 /* Dashboard management  */
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
 
 Route::middleware('auth')->group(function () {
 /*  Authentication management */
@@ -30,14 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
 /*  Basket management */
     Route::get('/panier', [PanierController::class, 'index'])->name('panier.lister');
     Route::get('/panier/add/{product}', [PanierController::class, 'ajouter'])->name('panier.ajouter');
     Route::get('/panier/remove/{panier}', [PanierController::class, 'removeOne'])->name('panier.enleverUn');
     Route::get('/panier/delete/{panier}', [PanierController::class, 'removeAll'])->name('panier.enleverTout');
     Route::get('/panier/empty', [PanierController::class, 'emptyBasket'])->name('panier.vider');
-
 
 /*  Favorite management */
     Route::get('/favoris', [FavorisController::class, 'index'])->name('favoris.lister');

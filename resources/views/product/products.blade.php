@@ -1,8 +1,20 @@
-@extends('layouts.store')
+@extends('layouts.shop')
+
+@section('title')
+    Cartzio | Nos Produits
+@endsection
+
 
 
 @section('content')
-    
+
+<x-category-list/>
+<x-product-list :products="$products"/>
+
+
+@php
+/*
+{{--     
 <ul class="ml-10 flex flex-1 gap-4">
         <h2>CATÉGORIES</h2>
         @foreach ($categories as $category )
@@ -16,6 +28,8 @@
 
 
 <!-- liens de pagiation -->
-{{ $products->links()  }}
+{{ $products->links()  }} --}}
+*/
+@endphp
 
 @endsection
