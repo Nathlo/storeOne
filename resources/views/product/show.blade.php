@@ -1,7 +1,7 @@
 @extends('layouts.shop')
 
 @section('title')
-    Cartzio | Product Détail
+    Cartzio | Votre Produit
 @endsection
 
 

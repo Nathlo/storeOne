@@ -1,94 +1,151 @@
-@extends('layouts.store')
+@extends('layouts.shop')
+
+@section('title')
+    Cartzio | Votre Panier
+@endsection
+
 
 @section('content')
-@php
-    $total= 0;
-    $nbrArticle=0;
-@endphp
-<div class="flex flex-col md:flex-row w-screen h-full px-14 py-7">
+    
+     <!-- Start Hero -->
+     <section class="relative table w-full py-20 lg:py-24 bg-gray-50 dark:bg-slate-800">
+        <div class="container relative">
+            <div class="grid grid-cols-1 mt-14">
+                <h3 class="text-3xl leading-normal font-semibold">Votre Panier</h3>
+            </div><!--end grid-->
 
-    <!-- My Cart -->
-    <div class="w-full flex flex-col h-fit gap-4 p-4 ">
-        <div class="flex flex-row justify-between">
-            <p class="text-blue-900 text-xl font-extrabold">Mon panier</p>
-            <a href="{{ route('panier.vider')  }}" class="text-red-900 text-xl font-extrabold">Vider le panier</a>
-        </div>
-        @forelse ($paniers as $panier)
-            @php
-                $total += $panier->product->price * $panier->quantite;
-                $nbrArticle += $panier->quantite
-            @endphp
-            <!-- component -->
+            <div class="relative mt-3">
+                <ul class="tracking-[0.5px] mb-0 inline-block">
+                    <li class="inline-block uppercase text-[13px] font-bold duration-500 ease-in-out hover:text-orange-500"><a href="{{ route('product') }}">Accueil</a></li>
+                    <li class="inline-block text-base text-slate-950 dark:text-white mx-0.5 ltr:rotate-0 rtl:rotate-180"><i class="mdi mdi-chevron-right"></i></li>
+                    <li class="inline-block uppercase text-[13px] font-bold text-orange-500" aria-current="page">panier</li>
+                </ul>
+            </div>
+        </div><!--end container-->
+    </section><!--end section-->
+    <!-- End Hero -->
 
-        <!-- Product -->
-        <div class="flex flex-col p-4 text-lg font-semibold shadow-md border rounded-sm">
-            <div class="flex flex-col md:flex-row gap-3 justify-between">
-                <!-- Product Information -->
-                <div class="flex flex-row gap-6 items-center">
-                    <div class="w-28 h-28">
-                        <img class="w-full h-full" src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg">
+    <!-- Start -->
+    <section class="relative md:py-24 py-16">
+        <div class="container relative">
+            <div class="grid lg:grid-cols-1">
+                <div class="relative overflow-x-auto shadow dark:shadow-gray-800 rounded-md">
+                    <table class="w-full text-start">
+                        <thead class="text-sm uppercase bg-slate-50 dark:bg-slate-800">
+                            <tr>
+                                <th scope="col" class="p-4 w-4"></th>
+                                <th scope="col" class="text-start p-4 min-w-[220px]">Produits</th>
+                                <th scope="col" class="p-4 w-24 min-w-[100px]">Prix</th>
+                                <th scope="col" class="p-4 w-56 min-w-[220px]">Quantité</th>
+                                <th scope="col" class="p-4 w-24 min-w-[100px]">Total(€)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white dark:bg-slate-900">
+                                <td class="p-4"><a href=""><i class="mdi mdi-window-close text-red-600"></i></a></td>
+                                <td class="p-4">
+                                    <span class="flex items-center">
+                                        <img src="assets/images/shop/black-print-t-shirt.jpg" class="rounded shadow dark:shadow-gray-800 w-12" alt="">
+                                        <span class="ms-3">
+                                            <span class="block font-semibold">T-shirt (M)</span>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="p-4 text-center">$ 280</td>
+                                <td class="p-4 text-center">
+                                    <div class="qty-icons">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="size-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white minus">-</button>
+                                        <input min="0" name="quantity" value="3" type="number" class="h-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white pointer-events-none w-16 ps-4 quantity">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="size-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white plus">+</button>
+                                    </div>
+                                </td>
+                                <td class="p-4  text-end">$ 840</td>
+                            </tr>
+
+                            <tr class="bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-gray-800">
+                                <td class="p-4"><a href=""><i class="mdi mdi-window-close text-red-600"></i></a></td>
+                                <td class="p-4">
+                                    <span class="flex items-center">
+                                        <img src="assets/images/shop/fashion-shoes-sneaker.jpg" class="rounded shadow dark:shadow-gray-800 w-12" alt="">
+                                        <span class="ms-3">
+                                            <span class="block font-semibold">Sneaker Shoes</span>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="p-4 text-center">$ 160</td>
+                                <td class="p-4 text-center">
+                                    <div class="qty-icons">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="size-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white minus">-</button>
+                                        <input min="0" name="quantity" value="1" type="number" class="h-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white pointer-events-none w-16 ps-4 quantity">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="size-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white plus">+</button>
+                                    </div>
+                                </td>
+                                <td class="p-4  text-end">$ 160</td>
+                            </tr>
+
+                            <tr class="bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-gray-800">
+                                <td class="p-4"><a href=""><i class="mdi mdi-window-close text-red-600"></i></a></td>
+                                <td class="p-4">
+                                    <span class="flex items-center">
+                                        <img src="assets/images/shop/ladies-skirt-pair.jpg" class="rounded shadow dark:shadow-gray-800 w-12" alt="">
+                                        <span class="ms-3">
+                                            <span class="block font-semibold">Ladies Skirt</span>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td class="p-4 text-center">$ 500</td>
+                                <td class="p-4 text-center">
+                                    <div class="qty-icons">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="size-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white minus">-</button>
+                                        <input min="0" name="quantity" value="1" type="number" class="h-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white pointer-events-none w-16 ps-4 quantity">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="size-9 inline-flex items-center justify-center tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white plus">+</button>
+                                    </div>
+                                </td>
+                                <td class="p-4  text-end">$ 500</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="grid lg:grid-cols-12 md:grid-cols-2 grid-cols-1 mt-6 gap-6">
+                    <div class="lg:col-span-9 md:order-1 order-3">
+                        <div class="space-x-1">
+                            <a href="" class="py-2 px-5 inline-block font-semibold tracking-wide align-middle text-base text-center bg-orange-500 text-white rounded-md mt-2">Payez Maintenant</a>
+                            <a href="" class="py-2 px-5 inline-block font-semibold tracking-wide align-middle text-base text-center rounded-md bg-orange-500/5 hover:bg-orange-500 text-orange-500 hover:text-white mt-2">Continuez Vos Achats</a>
+                        </div>
                     </div>
-                    <div class="flex flex-col gap-1">
-                        <p class="text-lg text-gray-800 font-semibold">{{$panier->product->nom}}</p>
+
+                    <div class="lg:col-span-3 md:order-2 order-1">
+                        <ul class="list-none shadow dark:shadow-gray-800 rounded-md">
+                            <li class="flex justify-between p-4">
+                                <span class="font-semibold text-lg">Sous-total :</span>
+                                <span class="text-slate-400">$ 1500</span>
+                            </li>
+                            <li class="flex justify-between p-4 border-t border-gray-100 dark:border-gray-800">
+                                <span class="font-semibold text-lg">TVA :</span>
+                                <span class="text-slate-400">$ 150</span>
+                            </li>
+                            <li class="flex justify-between font-semibold p-4 border-t border-gray-200 dark:border-gray-600">
+                                <span class="font-semibold text-lg">Total :</span>
+                                <span class="font-semibold">$ 1650</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <!-- Price Information -->
-                <div class="self-center text-center">
-                    <p class="text-gray-800 font-normal text-xl">{{$panier->product->price}} €</p>
-                </div>
-                <!-- Remove Product Icon -->
-                <div class="self-center">
-                    <a href="{{route('panier.enleverTout',$panier)}}" class="">
-                        <svg class="" height="24px" width="24px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512"  xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <g>
-                            <path d="M400,113.3h-80v-20c0-16.2-13.1-29.3-29.3-29.3h-69.5C205.1,64,192,77.1,192,93.3v20h-80V128h21.1l23.6,290.7   c0,16.2,13.1,29.3,29.3,29.3h141c16.2,0,29.3-13.1,29.3-29.3L379.6,128H400V113.3z M206.6,93.3c0-8.1,6.6-14.7,14.6-14.7h69.5   c8.1,0,14.6,6.6,14.6,14.7v20h-98.7V93.3z M341.6,417.9l0,0.4v0.4c0,8.1-6.6,14.7-14.6,14.7H186c-8.1,0-14.6-6.6-14.6-14.7v-0.4   l0-0.4L147.7,128h217.2L341.6,417.9z"/>
-                            <g>
-                            <rect height="241" width="14" x="249" y="160"/>
-                            <polygon points="320,160 305.4,160 294.7,401 309.3,401"/>
-                            <polygon points="206.5,160 192,160 202.7,401 217.3,401"/>
-                            </g>
-                        </g>
-                        </svg>
-                    </a>
-                </div>
             </div>
-            <!-- Product Quantity -->
-            <div class="flex flex-row self-center gap-1">
-                <a href="{{route('panier.enleverUn',$panier)}}" class="w-5 h-5 self-center rounded-full border border-gray-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#d1d5db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14" />
-                    </svg>
-                </a>
-                <input type="text" readonly="readonly" value="{{$panier->quantite}}" class="w-8 h-8 text-center text-gray-900 text-sm outline-none border border-gray-300 rounded-sm">
-                <a href="{{route('panier.ajouter',$panier->product)}}" class="w-5 h-5 self-center rounded-full border border-gray-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 5v14M5 12h14" />
-                    </svg>
-                </a>
-            </div>
-        </div>
-        @empty
-        <p class="text-sm font-semibold leading-6 text-gray-900">Il n'y a pas d'article</p>
-        @endforelse
+        </div><!--end container-->
 
-    </div>
-        <!-- Purchase Resume -->
-        <div class="flex flex-col w-full md:w-2/3 h-fit gap-4 p-4">
-            <p class="text-blue-900 text-xl font-extrabold">Resumé de la commande</p>
-            <div class="flex flex-col p-4 gap-4 text-lg font-semibold shadow-md border rounded-sm">
-                <div class="flex flex-row justify-between">
-                    <p class="text-gray-600">Quantité : {{$nbrArticle}} produits</p>
-                    <p class="text-end font-bold"> Prix total : {{ $totalPrice }} €</p>
+        <div class="container relative md:mt-24 mt-16">
+            <div class="grid md:grid-cols-12 grid-cols-1 items-center">
+                <div class="lg:col-span-5 md:col-span-6">
+                    <img src="assets/images/envelope.svg" class="mx-auto d-block" alt="">
                 </div>
-                <div class="flex flex-col gap-2">
-                    <a href="{{ route('commande.create') }}" class="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Commander</a>
 
-                    <a href="{{route('product')}}" class="transition-colors text-sm bg-white border border-gray-600 p-2 rounded-sm w-full text-gray-700 text-hover shadow-md text-center">
-                            Ajouter des produits
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+                
+            </div><!--end gird-->
+        </div><!--end container-->
+    </section><!--end section-->
+    <!-- End -->
+
 
 @endsection
