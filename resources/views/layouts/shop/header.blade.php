@@ -2,7 +2,7 @@
 <nav id="topnav" class="defaultscroll is-sticky tagline-height">
     <div class="container relative">
         <!-- Logo container-->
-        <a class="logo" href="index.html">
+        <a class="logo" href="{{ route('product') }}">
             <div>
                 <img src="https://shreethemes.in/cartzio/layouts/assets/images/logo-dark.png" class="h-[22px] inline-block dark:hidden" alt="">
                 <img src="https://shreethemes.in/cartzio/layouts/assets/images/logo-white.png" class="h-[22px] hidden dark:inline-block" alt="">
@@ -39,72 +39,61 @@
                 </div>
             </li>
 
+            @auth
             <li class="dropdown inline-block relative ps-0.5">
                 <button data-dropdown-toggle="dropdown" class="dropdown-toggle size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-orange-500 border border-orange-500 text-white" type="button">
                     <i data-feather="shopping-cart" class="h-4 w-4"></i>
                 </button>
+
+                @php
+                    $totalCart = 0;
+                    $paniers = \App\Models\Panier::where('user_id', auth()->user()->id)->get();
+                @endphp
                 <!-- Dropdown menu -->
                 <div class="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-64 rounded-md bg-white dark:bg-slate-900 shadow dark:shadow-gray-800 hidden" onclick="event.stopPropagation();">
                     <ul class="py-3 text-start" aria-labelledby="dropdownDefault">
-                        <li>
-                            <a href="#" class="flex items-center justify-between py-1.5 px-4">
-                                <span class="flex items-center">
-                                    <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/trendy-shirt.jpg" class="rounded shadow dark:shadow-gray-800 w-9" alt="">
-                                    <span class="ms-3">
-                                        <span class="block font-semibold">T-shirt (M)</span>
-                                        <span class="block text-sm text-slate-400">$320 X 2</span>
+                        @forelse ($paniers as $panier)
+                            @php
+                                $total = 0;
+                                $total += $panier->product->price * $panier->quantite;
+                                $totalCart += $total + (20 * $total / 100);
+                            @endphp
+                            <li>
+                                <a href="#" class="flex items-center justify-between py-1.5 px-4">
+                                    <span class="flex items-center">
+                                        <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/trendy-shirt.jpg" class="rounded shadow dark:shadow-gray-800 w-9" alt="">
+                                        <span class="ms-3">
+                                            <span class="block font-semibold">{{$panier->product->name}}</span>
+                                            <span class="block text-sm text-slate-400">{{$panier->product->price}} x {{$panier->quantite}}</span>
+                                        </span>
                                     </span>
-                                </span>
 
-                                <span class="font-semibold">$640</span>
-                            </a>
-                        </li>
+                                    <span class="font-semibold">{{ $panier->product->price * $panier->quantite }}€</span>
+                                </a>
+                            </li>
 
-                        <li>
-                            <a href="#" class="flex items-center justify-between py-1.5 px-4">
-                                <span class="flex items-center">
-                                    <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/luxurious-bag2.jpg" class="rounded shadow dark:shadow-gray-800 w-9" alt="">
-                                    <span class="ms-3">
-                                        <span class="block font-semibold">Bag</span>
-                                        <span class="block text-sm text-slate-400">$50 X 5</span>
-                                    </span>
-                                </span>
-
-                                <span class="font-semibold">$250</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#" class="flex items-center justify-between py-1.5 px-4">
-                                <span class="flex items-center">
-                                    <img src="https://shreethemes.in/cartzio/layouts/assets/images/shop/apple-smart-watch.jpg" class="rounded shadow dark:shadow-gray-800 w-9" alt="">
-                                    <span class="ms-3">
-                                        <span class="block font-semibold">Watch (Men)</span>
-                                        <span class="block text-sm text-slate-400">$800 X 1</span>
-                                    </span>
-                                </span>
-
-                                <span class="font-semibold">$800</span>
-                            </a>
-                        </li>
+                        @empty
+                        <p class="text-sm font-semibold leading-6 text-gray-900">Votre Panier est vide.</p>    
+                        @endforelse
 
                         <li class="border-t border-gray-100 dark:border-gray-800 my-2"></li>
 
                         <li class="flex items-center justify-between py-1.5 px-4">
-                            <h6 class="font-semibold mb-0">Total($):</h6>
-                            <h6 class="font-semibold mb-0">$1690</h6>
+                            <h6 class="font-semibold mb-0">Total(€):</h6>
+                            <h6 class="font-semibold mb-0">{{ $totalCart }}</h6>
                         </li>
 
                         <li class="py-1.5 px-4">
                             <span class="text-center block">
-                                <a href="javascript:void(0)" class="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-orange-500 border border-orange-500 text-white">View Cart</a>
-                                <a href="javascript:void(0)" class="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-orange-500 border border-orange-500 text-white">Checkout</a>
+                                <a href="{{ route('panier.lister') }}" class="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-orange-500 border border-orange-500 text-white">Voir Panier</a>
+                                <a href="javascript:void(0)" class="py-[5px] px-4 inline-block font-semibold tracking-wide align-middle duration-500 text-sm text-center rounded-md bg-orange-500 border border-orange-500 text-white">Paiement</a>
                             </span>
-                            <p class="text-sm text-slate-400 mt-1">*T&C Apply</p>
+                            <p class="text-sm text-slate-400 mt-1">*Selon CGV</p>
                         </li>
                     </ul>
                 </div>
             </li>
+            @endauth
 
             <li class="inline-block ps-0.5">
                 <a href="javascript:void(0)" class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full bg-orange-500 text-white">
@@ -114,7 +103,8 @@
     
             <li class="dropdown inline-block relative ps-0.5">
                 <button data-dropdown-toggle="dropdown" class="dropdown-toggle items-center" type="button">
-                    <span class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-orange-500 bg-orange-500 text-white"><i data-feather="user" class="h-4 w-4 me-2"></i></span>
+                    <span class="size-9 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center rounded-full border border-orange-500 bg-orange-500 text-white">
+                        <i data-feather="user" class="h-4 w-4"></i></span>
                 </button>
                 <!-- Dropdown menu -->
                 <div class="dropdown-menu absolute end-0 m-0 mt-4 z-10 w-48 rounded-md overflow-hidden bg-white dark:bg-slate-900 shadow dark:shadow-gray-700 hidden" onclick="event.stopPropagation();">

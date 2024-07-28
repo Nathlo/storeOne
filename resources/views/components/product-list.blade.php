@@ -3,12 +3,12 @@
     <div class="container relative">
         <div class="grid items-end md:grid-cols-2 mb-6">
             <div class="md:text-start text-center">
-                <h5 class="font-semibold text-3xl leading-normal mb-4">Trending Items</h5>
-                <p class="text-slate-400 max-w-xl">Shop the latest products from the most popular items</p>
+                <h5 class="font-semibold text-3xl leading-normal mb-4">Nos Produits Tendance</h5>
+                <p class="text-slate-400 max-w-xl">Achetez les derniers produits parmi les articles les plus populaires</p>
             </div>
 
             <div class="md:text-end hidden md:block">
-                <a href="shop-grid.html" class="text-slate-400 hover:text-orange-500">See More Items <i class="mdi mdi-arrow-right"></i></a>
+                <a href="shop-grid.html" class="text-slate-400 hover:text-orange-500">Voir plus<i class="mdi mdi-arrow-right"></i></a>
             </div>
         </div><!--end grid-->
 

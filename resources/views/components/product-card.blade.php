@@ -13,7 +13,7 @@
       </ul>
 
       <ul class="list-none absolute top-[10px] start-4">
-          <li><a href="javascript:void(0)" class="bg-red-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded h-5">New</a></li>
+          <li><a href="javascript:void(0)" class="bg-red-600 text-white text-[10px] font-bold px-2.5 py-0.5 rounded h-5">Nouveau</a></li>
       </ul>
   </div>
 

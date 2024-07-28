@@ -19,7 +19,7 @@
         <!-- Css -->
         <link href="https://shreethemes.in/cartzio/layouts/assets/libs/tiny-slider/tiny-slider.css" rel="stylesheet">
         <!-- Main Css -->
-        <link href="https://shreethemes.in/cartzio/layouts/assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" type="text/css">
+        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css" rel="stylesheet" type="text/css">
         <link href="https://shreethemes.in/cartzio/layouts/assets/css/tailwind.min.css" rel="stylesheet" type="text/css">
 
     </head>
